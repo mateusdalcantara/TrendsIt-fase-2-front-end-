@@ -1,0 +1,205 @@
+body {
+    background-color: #fbfbfb;
+    font-family: 'Roboto', sans-serif;
+
+    -webkit-font-smothing: antialiased !important
+}
+
+
+
+main {
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+div.newPost {
+    width: 100%;
+    height: 240px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 50px 0;
+    padding: 25px;
+
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.newPost .infoUser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newPost .infoUser .imgUser {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #333;
+}
+
+strong {
+    margin-left: 10px;
+    color: #23A0FF;
+}
+
+.newPost .formPost {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.newPost .formPost textarea {
+    height: 90px;
+    background: #fbfbfb;
+    margin: 15px 0;
+    padding: 25px;
+    border-radius: 10px;
+    resize: none;
+    outline: none;
+    border: 0;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: #727272;
+}
+
+.newPost .formPost .iconsAndButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.newPost .formPost .iconsAndButton .icons{
+    width: 100px;
+    display: flex;
+    align-items:center ;
+    justify-content: space-between;
+}
+
+
+.newPost .formPost .iconsAndButton .icons .btnFileForm {
+    outline: none;
+    margin-right: 10px;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.newPost .formPost .iconsAndButton .btnSubmitForm {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    background: #23A0FF;
+    color: #ffff;
+    font-weight: bold;
+    padding: 10px 50px;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.newPost .formPost .iconsAndButton .btnSubmitForm:hover{
+    background-color: #23A0FF;
+}
+   /* Postagem */
+
+
+
+
+.posts .post{
+    margin-bottom:50px;
+    background:#fff;
+    border-radius: 10px;
+    padding: 25px;
+    width: 100%;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+.posts .post .infoUserPost{
+    display: flex;
+    align-items: center;
+}
+
+.posts .post .infoUserPost  .nameAndHour{
+    margin-left:10px;
+}
+
+.posts .post .infoUserPost .imgUserPost{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background:  #23A0FF;
+}
+
+.posts .post .infoUserPost  .nameAndHour >strong{
+    color:#23A0FF; 
+}
+
+.posts .post .infoUserPost  .nameAndHour >p{
+    color: #D1D1D1;
+    font-size: 12px;
+}
+
+.posts .post p{
+    width: 100%;
+    margin: 20px 0;
+    font-weight: bold;
+    color :#727272;
+}
+
+.posts .post .actionBtnPost{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.posts .post .actionBtnPost .filesPost{
+    padding:5px 20px;
+  border: 0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  outline:none;
+  margin-right: 10px;
+  border-radius:10px;
+  cursor: pointer;
+  color:#fff;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.posts .post .actionBtnPost .filesPost img{
+    margin-right: 5px;
+}
+
+.like{
+    background: #ff6b6b;
+}
+
+.like:hover{
+    background: rgb(248, 75, 75);
+}
+
+
+.comment{
+    background: #ffc320;
+}
+
+.comment:hover{
+    background: rgb(245, 180, 0);
+}
+
+.share{
+    background: #23A0FF;
+}
+
+.share:hover{
+    background: #02528f;
+}

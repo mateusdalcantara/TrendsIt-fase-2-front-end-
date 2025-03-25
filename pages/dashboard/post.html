@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../dashboard/post.css" />
+    <title>Rede Social</title>
+  </head>
+
+  <body>
+    <header>
+        <nav class="navbar bg-body-tertiary menu">
+            <div class="container-fluid">
+              <a class="navbar-brand">Navbar</a>
+              <div class="d-flex" >
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <i class="bi bi-person-circle"></i>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="./pages/login/login.html">Login</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <main>
+      <div class="newPost">
+        <div class="infoUser">
+          <div class="imgUser"></div>
+          <strong>Nome</strong>
+        </div>
+
+        <!-- // Formulario de Postagem -->
+
+        <form action="" class="formPost" id="formPost">
+          <textarea
+            id="textarea"
+            name="textarea"
+            placeholder="Oque você está pensando?"
+          ></textarea>
+
+          <div class="iconsAndButton">
+            <div class="icons">
+              <button type="button" class="btnFileForm">
+                <img
+                  src="#"
+                  alt="Adicionar uma imagem"
+                />
+              </button>
+              <button type="button" class="btnFileForm">
+                <img src="#" alt="Adicionar um gif" />
+              </button>
+              <button type="button" class="btnFileForm">
+                <img
+                  src="#"
+                  alt="Adicionar um video"
+                />
+              </button>
+            </div>
+
+            <button type="submit" class="btnSubmitForm">Publicar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Postagem -->
+
+      <ul class="posts" id="posts"></ul>
+    </main>
+
+    <script type="module" src="../dashboard/script.js"></script>
+  </body>
+</html>
