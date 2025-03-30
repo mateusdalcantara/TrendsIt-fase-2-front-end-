@@ -1,6 +1,4 @@
 body, html {
-    /* display: flex;
-    width: 100vh; */
     margin:0;
     padding: 0;
     box-sizing: border-box;
@@ -9,8 +7,11 @@ body, html {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    -webkit-font-smoothing: antialiased !important;
   
-  
+}
+li{
+    list-style: none;
 }
 
 .menu{
@@ -23,3 +24,5 @@ body, html {
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 28%, rgba(0,212,255,1) 100%);
 
 }
+  
+  
