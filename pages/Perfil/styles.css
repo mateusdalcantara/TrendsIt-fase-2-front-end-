@@ -1,0 +1,185 @@
+/* Estilos gerais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+/* Header do Perfil */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    border-radius: 8px;
+}
+
+/* Perfil */
+.card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card h3 {
+    margin-top: -25px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card p {
+    color: #555;
+    font-size: 1rem;
+}
+
+#perfil-acoes .btn {
+    margin: 5px;
+}
+
+/* Navegação (Tab Menu) */
+.nav-tabs {
+    border-bottom: 2px solid #007bff;
+}
+
+.nav-tabs .nav-link {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Feed de Posts */
+textarea.form-control {
+    min-height: 100px;
+}
+
+#feed .card {
+    margin-bottom: 15px;
+}
+
+#feed .d-flex {
+    justify-content: space-between;
+}
+
+#feed .btn {
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+#editar-post button {
+    font-size: 0.9rem;
+}
+
+/* Galeria de Fotos */
+.galeria-fotos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.galeria-fotos .col-4 {
+    text-align: center;
+}
+
+.galeria-fotos img {
+    border-radius: 8px;
+}
+
+/* Formulários */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+button.btn {
+    border-radius: 5px;
+}
+
+/* Configurações */
+.config-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.config-container label {
+    font-size: 0.9rem;
+}
+
+.config-container input {
+    margin-bottom: 15px;
+}
+
+/* Modais */
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Botões */
+button.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+button.btn-light {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+button.btn-light:hover {
+    background-color: #e2e6ea;
+}
+
+button.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+button.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+button.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+button.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+/* Efeito de carregamento da foto */
+input[type="file"] {
+    margin-bottom: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 767px) {
+    .card img {
+        width: 100%;
+        height: auto;
+    }
+}
