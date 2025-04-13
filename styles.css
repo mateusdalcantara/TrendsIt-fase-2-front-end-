@@ -13,6 +13,23 @@
 li{
     list-style: none;
 }
-
-  //comentarios desnecessarios
   
+.logo{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+}
+
+.gradient {
+    background: #833ab4;
+    background: linear-gradient(
+      to right,
+      #833ab4,#fd1d1d,#fcb045
+    );
+  }
+ 
+  .menuItem {
+    color: #ffff;
+    font-weight: 500;
+  }
+ 
