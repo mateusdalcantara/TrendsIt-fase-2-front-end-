@@ -1,0 +1,27 @@
+.groups-container {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.group-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.group-card h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.group-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+#groupModal .modal-content {
+  max-width: 500px;
+}

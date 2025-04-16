@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendsIT - Job Listings</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jobs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <script>
+        if (!localStorage.getItem('token')) window.location.href = 'index.html';
+    </script>
+
+    <nav class="main-nav">
+        <div class="brand">TrendsIT</div>
+        <div class="nav-links">
+            <button id="logoutBtn">Logout</button>
+            <button id="createJobBtn">+ Post Job</button>
+            <button id="profileBtn"><i class="fas fa-user"></i></button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <aside class="sidebar">
+            <!-- Reuse navigation from home.html -->
+        </aside>
+
+        <section class="content">
+            <div class="jobs-header">
+                <div class="search-filter">
+                    <input type="text" id="jobSearch" placeholder="Search jobs...">
+                    <div class="filters">
+                        <select id="filterJobType">
+                            <option value="">All Types</option>
+                            <option>Full-time</option>
+                            <option>Part-time</option>
+                            <option>Remote</option>
+                            <option>Contract</option>
+                        </select>
+                        <select id="filterLocation">
+                            <option value="">All Locations</option>
+                            <option>On-site</option>
+                            <option>Remote</option>
+                            <option>Hybrid</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jobs-container" id="jobsContainer">
+                <!-- Dynamic job cards -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Job Posting Modal -->
+    <div class="modal" id="jobModal">
+        <div class="modal-content">
+            <h3>Post New Job</h3>
+            <form id="jobForm">
+                <input type="text" id="jobTitle" placeholder="Job Title" required>
+                <input type="text" id="jobCompany" placeholder="Company" required>
+                <textarea id="jobDescription" placeholder="Job Description" rows="5" required></textarea>
+                <div class="job-details">
+                    <input type="text" id="jobLocation" placeholder="Location" required>
+                    <select id="jobType" required>
+                        <option value="">Job Type</option>
+                        <option>Full-time</option>
+                        <option>Part-time</option>
+                        <option>Contract</option>
+                    </select>
+                    <input type="number" id="jobSalary" placeholder="Salary (USD)">
+                </div>
+                <button type="submit" class="btn-primary">Post Job</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/jobs.js"></script>
+</body>
+</html>

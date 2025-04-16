@@ -1,0 +1,20 @@
+@media (max-width: 768px) {
+  .container {
+      grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 100;
+  }
+
+  .nav-links {
+      gap: 0.5rem;
+  }
+
+  .posts-container {
+      margin-bottom: 60px; /* Offset for mobile nav */
+  }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendsIT - Training Programs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/training.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <script>
+        if (!localStorage.getItem('token')) window.location.href = 'index.html';
+    </script>
+
+    <nav class="main-nav">
+        <div class="brand">TrendsIT</div>
+        <div class="nav-links">
+            <button id="logoutBtn">Logout</button>
+            <button id="profileBtn"><i class="fas fa-user"></i></button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="home.html"><i class="fas fa-home"></i> Feed</a></li>
+                    <li><a href="training.html" class="active"><i class="fas fa-graduation-cap"></i> Training</a></li>
+                    <li><a href="residency.html"><i class="fas fa-hospital"></i> Residency</a></li>
+                    <li><a href="jobs.html"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section class="content">
+            <div class="programs-header">
+                <h2>ICT Training Programs</h2>
+                <div class="program-filters">
+                    <select id="filterCategory">
+                        <option value="">All Categories</option>
+                        <option>Web Development</option>
+                        <option>Cybersecurity</option>
+                        <option>Data Science</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="training-programs" id="programsContainer">
+                <!-- Programs loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Enrollment Modal -->
+    <div class="modal" id="enrollmentModal">
+        <div class="modal-content">
+            <h3>Program Enrollment</h3>
+            <div id="programDetails"></div>
+            <form id="enrollmentForm">
+                <textarea placeholder="Why are you interested in this program?" rows="4"></textarea>
+                <button type="submit" class="btn-primary">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/training.js"></script>
+</body>
+</html>
