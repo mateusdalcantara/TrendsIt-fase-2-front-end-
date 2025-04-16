@@ -1,0 +1,8 @@
+.social-button:hover {
+  background-color: #f7fafc;
+  transform: translateY(-1px);
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
