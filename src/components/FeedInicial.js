@@ -1,24 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Subcomponentes (que você pode criar aos poucos)
 import PostList from './PostList';
 import ProfileModal from './modals/ProfileModal';
 import CreatePostModal from './modals/CreatePostModal';
+import CreateEventoModal from './modals/CreateEventoModal';
 import CalendarEventos from './CalendarEventos';
 import VagasList from './VagasList';
 import CreateVagaModal from './modals/CreateVagaModal';
 import CreateGrupoModal from './modals/CreateGrupoModal';
 
-
-
 const FeedInicial = () => {
+  const [posts, setPosts] = React.useState([]);
   const [showProfile, setShowProfile] = React.useState(false);
   const [showCreatePost, setShowCreatePost] = React.useState(false);
+  const [showCreateEvento, setShowCreateEvento] = React.useState(false);
   const [showCreateVaga, setShowCreateVaga] = React.useState(false);
   const [showCreateGrupo, setShowCreateGrupo] = React.useState(false);
-  const [posts, setPosts] = React.useState([]);
-  
 
   const navigate = useNavigate();
 
@@ -26,10 +24,11 @@ const FeedInicial = () => {
     <div style={{ padding: '2rem' }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
         <h1>Feed de Notícias</h1>
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button onClick={() => setShowProfile(true)}>Meu Perfil</button>
           <button onClick={() => setShowCreatePost(true)}>Novo Post</button>
-          <button onClick={() => navigate('/diretorio')}>Diretório de Alunos</button>
+          <button onClick={() => setShowCreateEvento(true)}>Novo Evento</button>
+          <button onClick={() => navigate('/diretorio')}>Diretório</button>
           <button onClick={() => navigate('/grupos')}>Meus Grupos</button>
           <button onClick={() => setShowCreateGrupo(true)}>Criar Grupo</button>
         </div>
@@ -38,7 +37,10 @@ const FeedInicial = () => {
       <PostList posts={posts} setPosts={setPosts} />
 
       <section style={{ marginTop: '3rem' }}>
-        <h2>Calendário de Eventos</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h2>Calendário de Eventos</h2>
+          <button onClick={() => setShowCreateEvento(true)}>Novo Evento</button>
+        </div>
         <CalendarEventos />
       </section>
 
@@ -49,15 +51,36 @@ const FeedInicial = () => {
         </div>
         <VagasList />
       </section>
+      
 
       {/* Modais */}
       {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
+
       {showCreatePost && (
-      <CreatePostModal
-        onClose={() => setShowCreatePost(false)}
-        onSave={(novoPost) => setPosts(prev => [novoPost, ...prev])}
-      />
+        <CreatePostModal
+          onClose={() => setShowCreatePost(false)}
+          onSave={(novo) => setPosts(prev => [novo, ...prev])}
+        />
       )}
+
+      {showCreateEvento && (
+        <CreateEventoModal
+          onClose={() => setShowCreateEvento(false)}
+          onSave={(novoEvento) => { /* ... */ }}
+        />
+      )}
+
+      {showCreateVaga && (
+        <CreateVagaModal
+          onClose={() => setShowCreateVaga(false)}
+          onSave={(nova) => {
+            // Se você mantiver a lista de vagas em estado, adicione aqui:
+            // setVagas(prev => [nova, ...prev]);
+          }}
+        />
+      )}
+
+      {showCreateGrupo && <CreateGrupoModal onClose={() => setShowCreateGrupo(false)} />}
       {showCreateVaga && <CreateVagaModal onClose={() => setShowCreateVaga(false)} />}
       {showCreateGrupo && <CreateGrupoModal onClose={() => setShowCreateGrupo(false)} />}
     </div>

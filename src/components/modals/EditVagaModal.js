@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-const CreateVagaModal = ({ onClose, onSave }) => {
-  const [titulo, setTitulo] = useState('');
-  const [conteudo, setConteudo] = useState('');
-  const [salario, setSalario] = useState('');
-  const [local, setLocal] = useState('');
+const EditVagaModal = ({ vaga, onClose, onSave }) => {
+  const [titulo, setTitulo] = useState(vaga.titulo);
+  const [conteudo, setConteudo] = useState(vaga.conteudo);
+  const [salario, setSalario] = useState(vaga.salario);
+  const [local, setLocal] = useState(vaga.local);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
 
-  const handleSalvar = async () => {
+  const handleUpdate = async () => {
     if (!titulo || !conteudo || !salario || !local) {
       toast.error('Preencha todos os campos');
       return;
     }
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/api/vagas', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ titulo, conteudo, salario, local })
-      });
-
-      if (!response.ok) throw new Error('Erro ao criar vaga');
-      const nova = await response.json();
-      toast.success('Vaga criada com sucesso!');
-      onSave(nova);
+      const res = await fetch(
+        `http://localhost:8080/api/vagas/${vaga.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ titulo, conteudo, salario, local })
+        }
+      );
+      if (!res.ok) throw new Error('Erro ao atualizar vaga');
+      const updated = await res.json();
+      toast.success('Vaga atualizada com sucesso!');
+      onSave(updated);
       onClose();
     } catch (err) {
       toast.error(err.message);
@@ -40,7 +42,7 @@ const CreateVagaModal = ({ onClose, onSave }) => {
   return (
     <div style={styles.overlay}>
       <div style={styles.modal}>
-        <h3>Nova Vaga</h3>
+        <h3>Editar Vaga</h3>
         <input
           placeholder="Título"
           value={titulo}
@@ -68,8 +70,8 @@ const CreateVagaModal = ({ onClose, onSave }) => {
         />
         <div style={styles.actions}>
           <button onClick={onClose}>Cancelar</button>
-          <button onClick={handleSalvar} disabled={loading}>
-            {loading ? 'Salvando...' : 'Publicar'}
+          <button onClick={handleUpdate} disabled={loading}>
+            {loading ? 'Salvando...' : 'Salvar'}
           </button>
         </div>
       </div>
@@ -86,8 +88,8 @@ const styles = {
     zIndex: 1000
   },
   modal: {
-    background: '#fff', padding: '1.5rem',
-    borderRadius: '8px', width: '400px',
+    background: '#fff', borderRadius: '8px',
+    padding: '1.5rem', width: '400px',
     display: 'flex', flexDirection: 'column', gap: '0.75rem'
   },
   input: { width: '100%', padding: '0.5rem' },
@@ -95,4 +97,4 @@ const styles = {
   actions: { display: 'flex', justifyContent: 'flex-end', gap: '1rem' }
 };
 
-export default CreateVagaModal;
+export default EditVagaModal;
