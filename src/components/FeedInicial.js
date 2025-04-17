@@ -10,11 +10,15 @@ import VagasList from './VagasList';
 import CreateVagaModal from './modals/CreateVagaModal';
 import CreateGrupoModal from './modals/CreateGrupoModal';
 
+
+
 const FeedInicial = () => {
   const [showProfile, setShowProfile] = React.useState(false);
   const [showCreatePost, setShowCreatePost] = React.useState(false);
   const [showCreateVaga, setShowCreateVaga] = React.useState(false);
   const [showCreateGrupo, setShowCreateGrupo] = React.useState(false);
+  const [posts, setPosts] = React.useState([]);
+  
 
   const navigate = useNavigate();
 
@@ -31,7 +35,7 @@ const FeedInicial = () => {
         </div>
       </header>
 
-      <PostList />
+      <PostList posts={posts} setPosts={setPosts} />
 
       <section style={{ marginTop: '3rem' }}>
         <h2>Calendário de Eventos</h2>
@@ -48,7 +52,12 @@ const FeedInicial = () => {
 
       {/* Modais */}
       {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
-      {showCreatePost && <CreatePostModal onClose={() => setShowCreatePost(false)} />}
+      {showCreatePost && (
+      <CreatePostModal
+        onClose={() => setShowCreatePost(false)}
+        onSave={(novoPost) => setPosts(prev => [novoPost, ...prev])}
+      />
+      )}
       {showCreateVaga && <CreateVagaModal onClose={() => setShowCreateVaga(false)} />}
       {showCreateGrupo && <CreateGrupoModal onClose={() => setShowCreateGrupo(false)} />}
     </div>

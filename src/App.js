@@ -9,6 +9,7 @@ import Grupos from './components/Grupos';
 import GrupoDetalhes from './components/GrupoDetalhes';
 import Vagas from './components/Vagas';
 import Eventos from './components/Eventos';
+//import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -16,10 +17,11 @@ function App() {
     <Router>
       <Routes>
         {/* Rotas públicas */}
+        
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        
         {/* Tela pós-login */}
         <Route path="/dashboard" element={<FeedInicial />} />
 

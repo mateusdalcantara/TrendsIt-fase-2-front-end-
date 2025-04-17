@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const CreatePostModal = ({ onClose, onSave }) => {
-  const [titulo, setTitulo] = useState('');
-  const [conteudo, setConteudo] = useState('');
+const EditPostModal = ({ post, onClose, onSave }) => {
+  const [titulo, setTitulo] = useState(post.titulo);
+  const [conteudo, setConteudo] = useState(post.conteudo);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const token = localStorage.getItem('token');
 
   const handleSalvar = async () => {
-    if (!titulo || !conteudo) {
-      toast.error('Preencha todos os campos');
-      return;
-    }
-
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/api/post', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:8080/api/post/${post.id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
@@ -25,13 +19,11 @@ const CreatePostModal = ({ onClose, onSave }) => {
         body: JSON.stringify({ titulo, conteudo })
       });
 
-      if (!response.ok) throw new Error('Erro ao criar post');
-      const novo = await response.json();
-      onSave(novo);
-      toast.success('Post criado com sucesso!');
-      onClose();
+      if (!response.ok) throw new Error('Erro ao editar post');
+      const atualizado = await response.json();
+      onSave(atualizado);
     } catch (err) {
-      toast.error(err.message);
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -40,8 +32,10 @@ const CreatePostModal = ({ onClose, onSave }) => {
   return (
     <div style={styles.overlay}>
       <div style={styles.modal}>
-        <h3>Novo Post</h3>
+        <h3>Editar Postagem</h3>
+        {error && <p style={styles.error}>{error}</p>}
         <input
+          type="text"
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
           placeholder="Título"
@@ -57,7 +51,7 @@ const CreatePostModal = ({ onClose, onSave }) => {
         <div style={styles.actions}>
           <button onClick={onClose}>Cancelar</button>
           <button onClick={handleSalvar} disabled={loading}>
-            {loading ? 'Salvando...' : 'Publicar'}
+            {loading ? 'Salvando...' : 'Salvar'}
           </button>
         </div>
       </div>
@@ -78,23 +72,28 @@ const styles = {
     backgroundColor: '#fff',
     padding: '1.5rem',
     borderRadius: '10px',
-    width: '400px'
+    width: '400px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
   },
   input: {
     width: '100%',
-    padding: '0.5rem',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    padding: '0.5rem'
   },
   textarea: {
     width: '100%',
-    padding: '0.5rem',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    padding: '0.5rem'
   },
   actions: {
     display: 'flex',
     justifyContent: 'flex-end',
     gap: '1rem'
+  },
+  error: {
+    color: 'red',
+    marginBottom: '1rem'
   }
 };
 
-export default CreatePostModal;
+export default EditPostModal;
