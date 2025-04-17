@@ -112,24 +112,6 @@ const Login = () => {
     setError('');
 
 
-    const handleLogin = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          localStorage.setItem("token", data.supabaseToken);
-          navigate("/home");
-        }
-      } catch (error) {
-        console.error("Erro no login:", error);
-      }
-    };
-
     try {
       // Validation
       if (!email || !password) throw new Error('Please fill in all fields');
@@ -199,24 +181,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-
-  const handleLogin = async () => {
-  try {
-    const response = await fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("token", data.supabaseToken); // Armazene o token
-      navigate("/home"); // Redirecione para a tela principal
-    }
-  } catch (error) {
-    console.error("Erro no login:", error);
-  }
-};
 
   return (
     <div style={styles.container}>

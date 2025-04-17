@@ -1,26 +1,34 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Login from './components/login';
 import Register from './components/register';
+import FeedInicial from './components/FeedInicial'; // Tela principal pós-login
+import Diretorio from './components/Diretorio';
+import Grupos from './components/Grupos';
+import GrupoDetalhes from './components/GrupoDetalhes';
+import Vagas from './components/Vagas';
+import Eventos from './components/Eventos';
 
 
 function App() {
-  React.useEffect(() => {
-    console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
-    console.log('Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY);
-    
-    if (!process.env.REACT_APP_SUPABASE_URL || !process.env.REACT_APP_SUPABASE_ANON_KEY) {
-      console.error('Missing Supabase credentials!');
-    }
-  }, []);
-
   return (
     <Router>
       <Routes>
+        {/* Rotas públicas */}
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+
+        {/* Tela pós-login */}
+        <Route path="/dashboard" element={<FeedInicial />} />
+
+        {/* Telas internas acessadas pelo dashboard */}
+        <Route path="/diretorio" element={<Diretorio />} />
+        <Route path="/grupos" element={<Grupos />} />
+        <Route path="/grupos/:id" element={<GrupoDetalhes />} />
+        <Route path="/vagas" element={<Vagas />} />
+        <Route path="/eventos" element={<Eventos />} />
       </Routes>
     </Router>
   );
