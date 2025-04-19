@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrendsIt - Login / Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="formTitle">Login</h2>
+    <div id="message" class="message"></div>
+    <form id="authForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <input type="text" id="username" placeholder="Usuário" style="display: none;">
+      <button type="submit" id="submitBtn">Entrar</button>
+    </form>
+    <div class="switch">
+      <span id="toggleText">Não tem uma conta? </span><a id="toggleLink">Cadastre-se</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,2 +1,0 @@
-alert("Script loaded!");
-
