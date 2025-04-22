@@ -12,7 +12,7 @@ window.onload = function() {
   const token = localStorage.getItem('token');
   if (token) {
     // Se o token estiver no localStorage, redireciona diretamente para a página do usuário
-    window.location.href = 'http://localhost:3000/pages/usuario/index.html';
+    window.location.href = '/pages/usuario/index.html';
   }
 };
 
@@ -39,8 +39,9 @@ form.addEventListener('submit', async (e) => {
   const username = document.getElementById('username').value;
 
   try {
+    let response;
     if (isLogin) {
-      const response = await fetch('http://localhost:8080/auth/login', {
+      response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -61,9 +62,9 @@ form.addEventListener('submit', async (e) => {
       console.log('Usuário logado:', data);
       
       // Redireciona para a página do usuário
-      window.location.href = 'http://localhost:3000/pages/usuario/index.html';
+      window.location.href = '/pages/usuario/index.html';
     } else {
-      const response = await fetch('http://localhost:8080/auth/register', {
+      response = await fetch('http://localhost:8080/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, username })

@@ -1,50 +1,56 @@
-// Função para carregar o feed inicial com posts, eventos e vagas
-function carregarFeed() {
-  const feed = document.getElementById('feedConteudo');
-  feed.innerHTML = "<p class='text-muted'>Carregando conteúdo...</p>";
+// Função de logout
+function sair() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('username');
+  localStorage.removeItem('role');
+  window.location.href = '/pages/login/index.html';
+}
 
-  Promise.all([
-    fetch('/api/posts/amigos').then(res => res.json()),
-    fetch('/api/eventos/amigos').then(res => res.json()),
-    fetch('/api/vagas/recentes').then(res => res.json())
-  ])
-    .then(([posts, eventos, vagas]) => {
-      feed.innerHTML = '';
+// Função para carregar o perfil do usuário
+function carregarPerfil() {
+  const token = localStorage.getItem('token');
+  const perfilContent = document.getElementById('perfilContent');
 
-      posts.forEach(post => {
-        feed.innerHTML += `
-          <div class="feed-card">
-            <h6>${post.autor}</h6>
-            <small>${new Date(post.data).toLocaleString()}</small>
-            <p>${post.conteudo}</p>
-          </div>
-        `;
-      });
+  if (!token) {
+    perfilContent.innerHTML = "<p class='text-danger'>Você precisa estar logado para ver o perfil.</p>";
+    return;
+  }
 
-      eventos.forEach(evento => {
-        feed.innerHTML += `
-          <div class="feed-card">
-            <h6>📅 Evento: ${evento.titulo}</h6>
-            <small>${new Date(evento.data).toLocaleDateString()}</small>
-            <p>${evento.descricao}</p>
-          </div>
-        `;
-      });
+  perfilContent.innerHTML = "<p class='text-muted'>Carregando perfil...</p>";
 
-      vagas.forEach(vaga => {
-        feed.innerHTML += `
-          <div class="feed-card">
-            <h6>💼 Vaga: ${vaga.titulo}</h6>
-            <small>${vaga.empresa} • ${new Date(vaga.publicadaEm).toLocaleDateString()}</small>
-            <p>${vaga.descricao}</p>
-          </div>
-        `;
-      });
+  fetch('http://localhost:8080/profiles/meu-perfil', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao carregar perfil.");
+      return res.json();
+    })
+    .then(perfil => {
+      console.log("Perfil carregado:", perfil);
+      perfilContent.innerHTML = `
+        <h5>${perfil.username}</h5>
+        <p><strong>ID:</strong> ${perfil.id}</p>
+        <p><strong>Idade:</strong> ${perfil.idade}</p>
+        <p><strong>Curso:</strong> ${perfil.curso}</p>
+        <p><strong>Diretório:</strong> ${perfil.diretorioNome}</p>
+        <p><strong>Função:</strong> ${perfil.role}</p>
+        <p><strong>Número de Amigos:</strong> ${perfil.friendNumber}</p>
+        <p><strong>Imagem do Perfil:</strong> <img src="${perfil.profileImage}" alt="Imagem do Perfil" width="100" /></p>
+        <p><strong>Criado em:</strong> ${new Date(perfil.createdAt).toLocaleString()}</p>
+      `;
     })
     .catch(() => {
-      feed.innerHTML = "<p class='text-danger'>Erro ao carregar o feed.</p>";
+      perfilContent.innerHTML = "<p class='text-danger'>Erro ao carregar perfil.</p>";
     });
 }
+
+// Chama a função de carregarPerfil ao abrir o modal
+$('#perfilModal').on('shown.bs.modal', function () {
+  carregarPerfil();
+});
 
 // Função de busca global por pessoas, grupos e eventos
 function buscarConteudo() {
@@ -54,8 +60,17 @@ function buscarConteudo() {
   const feed = document.getElementById('feedConteudo');
   feed.innerHTML = "<p class='text-muted'>Buscando...</p>";
 
-  fetch(`/api/busca?query=${encodeURIComponent(termo)}`)
-    .then(res => res.json())
+  const token = localStorage.getItem('token');
+
+  fetch(`/api/busca?query=${encodeURIComponent(termo)}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) throw new Error();
+      return res.json();
+    })
     .then(resultados => {
       feed.innerHTML = `<p class='text-muted'>Resultados para: <strong>${termo}</strong></p>`;
 
@@ -100,14 +115,67 @@ function buscarConteudo() {
     });
 }
 
-// Carrega o feed assim que a tela for carregada
+// Função para carregar o feed inicial com posts, eventos e vagas
+function carregarFeed() {
+  const feed = document.getElementById('feedConteudo');
+  feed.innerHTML = "<p class='text-muted'>Carregando conteúdo...</p>";
+
+  const token = localStorage.getItem('token');
+
+  Promise.all([
+    fetch('/api/posts/amigos', { headers: { 'Authorization': `Bearer ${token}` } }).then(res => res.json()),
+    fetch('/api/eventos/amigos', { headers: { 'Authorization': `Bearer ${token}` } }).then(res => res.json()),
+    fetch('/api/vagas/recentes', { headers: { 'Authorization': `Bearer ${token}` } }).then(res => res.json())
+  ])
+    .then(([posts, eventos, vagas]) => {
+      feed.innerHTML = '';
+
+      posts.forEach(post => {
+        feed.innerHTML += `
+          <div class="feed-card">
+            <h6>${post.autor}</h6>
+            <small>${new Date(post.data).toLocaleString()}</small>
+            <p>${post.conteudo}</p>
+          </div>
+        `;
+      });
+
+      eventos.forEach(evento => {
+        feed.innerHTML += `
+          <div class="feed-card">
+            <h6>📅 Evento: ${evento.titulo}</h6>
+            <small>${new Date(evento.data).toLocaleDateString()}</small>
+            <p>${evento.descricao}</p>
+          </div>
+        `;
+      });
+
+      vagas.forEach(vaga => {
+        feed.innerHTML += `
+          <div class="feed-card">
+            <h6>💼 Vaga: ${vaga.titulo}</h6>
+            <small>${vaga.empresa} • ${new Date(vaga.publicadaEm).toLocaleDateString()}</small>
+            <p>${vaga.descricao}</p>
+          </div>
+        `;
+      });
+    })
+    .catch(() => {
+      feed.innerHTML = "<p class='text-danger'>Erro ao carregar o feed.</p>";
+    });
+}
+
+// Verifica se o usuário está logado ao carregar a página
 window.onload = function() {
   const token = localStorage.getItem('token');
   if (!token) {
-    // Se o token não existir, redireciona para a página de login
-    window.location.href = 'http://localhost:3000/pages/login/index.html';
+    window.location.href = '/pages/login/index.html';
   } else {
-    // Carregar feed, posts, eventos e vagas se o token for encontrado
     carregarFeed();
   }
 };
+
+// Redireciona para o perfil do usuário
+function irParaPerfil() {
+  window.location.href = '/pages/perfil/index.html';
+}
